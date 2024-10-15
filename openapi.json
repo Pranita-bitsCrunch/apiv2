@@ -1,0 +1,1938 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "bitsCrunch API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/example": {
+      "get": {
+        "x-sql-query": "SELECT *\nFROM table_names.example_table\n",
+        "summary": "Example for array",
+        "description": "Example for array",
+        "tags": [
+          "Example"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/blockchains": {
+      "get": {
+        "x-sql-query": "SELECT *\nFROM table_names.blockchain\nLIMIT @limit OFFSET @offset;\n",
+        "summary": "Retrieve Supported Blockchains",
+        "description": "Retrieve a paginated and sorted list of blockchains supported by the service.",
+        "tags": [
+          "Blockchains"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/market-insights/analytics": {
+      "get": {
+        "summary": "NFT Market Analytics Report",
+        "description": "Retrieve aggregate values, changes, and trends for various NFT market metrics.",
+        "tags": [
+          "NFT Market Insights"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__market_insights__analytics__{{time_range}};\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/market-insights/holders": {
+      "get": {
+        "summary": "NFT Holders Insights",
+        "description": "Retrieve aggregate values, changes, and trends for NFT market holders.",
+        "tags": [
+          "NFT Market Insights"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__market_insights__holders__{{time_range}};\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/market-insights/scores": {
+      "get": {
+        "summary": "NFT Scores Insights",
+        "description": "Retrieve aggregate values, changes, and trends for NFT market scores.",
+        "tags": [
+          "NFT Market Insights"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__market_insights__scores__{{time_range}};\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/market-insights/traders": {
+      "get": {
+        "summary": "NFT Traders Insights",
+        "description": "Retrieve aggregate values, changes, and trends for NFT market traders.",
+        "tags": [
+          "NFT Market Insights"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__market_insights__traders__{{time_range}};\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/market-insights/washtrade": {
+      "get": {
+        "summary": "NFT Wash Trade Insights",
+        "description": "Retrieve aggregate values, changes, and trends for NFT market wash trades.",
+        "tags": [
+          "NFT Market Insights"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__market_insights__washtrade__{{time_range}};\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/marketplace/metadata": {
+      "get": {
+        "summary": "NFT Marketplace Metadata",
+        "description": "Retrieve a paginated and sorted list of supported NFT marketplace metadata.",
+        "tags": [
+          "NFT Marketplace"
+        ],
+        "x-sql-query": "SELECT *\nFROM table_names.marketplace\nORDER BY marketplaces {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/marketplace/analytics": {
+      "get": {
+        "summary": "NFT Marketplace Analytics",
+        "description": "Retrieve a paginated and sorted list of NFT marketplaces and their metrics.",
+        "tags": [
+          "NFT Marketplace"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__marketplace__analytics__{{time_range}}\nWHERE {{name}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/sort_by"
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/marketplace_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/marketplace/holders": {
+      "get": {
+        "summary": "NFT Marketplace Holders",
+        "description": "Retrieve a paginated and sorted list of NFT marketplace holders and their metrics.",
+        "tags": [
+          "NFT Marketplace"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__marketplace__holders__{{time_range}}\nWHERE {{name}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/sort_by"
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/marketplace_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/marketplace/traders": {
+      "get": {
+        "summary": "NFT Marketplace Traders",
+        "description": "Retrieve a paginated and sorted list of NFT marketplace traders and their metrics.",
+        "tags": [
+          "NFT Marketplace"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__marketplace__traders__{{time_range}}\nWHERE {{name}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/sort_by"
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/marketplace_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/marketplace/washtrade": {
+      "get": {
+        "summary": "NFT Marketplace Wash Trades",
+        "description": "Retrieve a paginated and sorted list of NFT marketplace wash trades and their metrics.",
+        "tags": [
+          "NFT Marketplace"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__marketplace__washtrade__{{time_range}}\nWHERE {{name}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/sort_by"
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/marketplace_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/metadata": {
+      "get": {
+        "summary": "NFT Collection Metadata",
+        "description": "Retrieve a paginated and sorted list of supported NFT Collection metadata.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM table_names.collection_metadata_nft\nwhere {{contract_address}}\norder by collection {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/analytics": {
+      "get": {
+        "summary": "Collection Analytics",
+        "description": "Retrieve a paginated and sorted list of NFT collection analytics and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__analytics__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "assets",
+                "assets_change",
+                "floor_price",
+                "floor_price_eth",
+                "sales",
+                "sales_change",
+                "volume",
+                "volume_change",
+                "transactions",
+                "transactions_change",
+                "transfers",
+                "transfers_change"
+              ],
+              "default": "sales"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/holders": {
+      "get": {
+        "summary": "Collection Holders",
+        "description": "Retrieve a paginated and sorted list of NFT Collection Holder and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__holders__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "holders",
+                "holders_change"
+              ],
+              "default": "holders"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/scores": {
+      "get": {
+        "summary": "Collection Scores",
+        "description": "Retrieve a paginated and sorted list of NFT Collection Scores and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__scores__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "market_cap",
+                "marketcap_change",
+                "price_avg",
+                "price_avg_change",
+                "price_ceiling",
+                "minting_revenue",
+                "royalty_price"
+              ],
+              "default": "market_cap"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/traders": {
+      "get": {
+        "summary": "Collection Traders",
+        "description": "Retrieve a paginated and sorted list of NFT collection traders and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__traders__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "traders",
+                "traders_change",
+                "traders_ratio",
+                "traders_ratio_change",
+                "traders_buyers",
+                "traders_buyers_change",
+                "traders_sellers",
+                "traders_sellers_change"
+              ],
+              "default": "traders"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/washtrade": {
+      "get": {
+        "summary": "Collection Washtrade",
+        "description": "Retrieve a paginated and sorted list of NFT collection washtrade metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__washtrade__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "washtrade_assets",
+                "washtrade_assets_change",
+                "washtrade_suspect_sales",
+                "washtrade_suspect_sales_change",
+                "washtrade_volume",
+                "washtrade_volume_change",
+                "washtrade_wallets",
+                "washtrade_wallets_change"
+              ],
+              "default": "washtrade_assets"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/whales": {
+      "get": {
+        "summary": "Collection Whales",
+        "description": "Retrieve a paginated and sorted list of NFT collection whales and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__whales__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nft_count",
+                "mint_count",
+                "mint_volume",
+                "mint_whales",
+                "unique_wallets",
+                "unique_mint_wallets",
+                "unique_buy_wallets",
+                "unique_sell_wallets",
+                "total_mint_volume",
+                "total_sale_volume",
+                "buy_count",
+                "buy_volume",
+                "buy_whales",
+                "sell_count",
+                "sell_volume",
+                "sell_whales",
+                "whale_holders"
+              ],
+              "default": "nft_count"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/collection/profile": {
+      "get": {
+        "summary": "Collection Profile",
+        "description": "Retrieve a paginated and sorted list of NFT collection profile and their metrics.",
+        "tags": [
+          "NFT Collections"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__collection__profile__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "fear_and_greed_index",
+                "washtrade_index",
+                "metadata_score",
+                "liquidity_score",
+                "market_dominance_score",
+                "token_distribution_score",
+                "collection_score",
+                "holder_metrics_score",
+                "diamond_hands",
+                "profitable_volume",
+                "loss_making_volume",
+                "profitable_trades",
+                "loss_making_trades",
+                "zero_profit_trades",
+                "profitable_trades_percentage",
+                "avg_profitable_trades",
+                "loss_making_trades_percentage",
+                "avg_loss_making_trades"
+              ],
+              "default": "washtrade_index"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/analytics": {
+      "get": {
+        "summary": "Wallet Analytics",
+        "description": "Retrieve a paginated and sorted list of NFT Wallet analytics and their metrics.",
+        "tags": [
+          "NFT Wallets"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__analytics__{{time_range}}\nWHERE {{wallet}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/wallet"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "volume",
+                "sales",
+                "transactions",
+                "transfers",
+                "transactions_burn",
+                "transactions_transfer",
+                "transactions_mint",
+                "transactions_buy",
+                "transactions_sell",
+                "minted_value",
+                "volume_change",
+                "sales_change",
+                "transactions_change",
+                "transfers_change",
+                "transactions_burn_change",
+                "transactions_transfer_change",
+                "transactions_mint_change",
+                "transactions_buy_change",
+                "transactions_sell_change",
+                "minted_value_change",
+                "buy_volume",
+                "sell_volume"
+              ],
+              "default": "volume"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/scores": {
+      "get": {
+        "summary": "Wallet Scores",
+        "description": "Retrieve a paginated and sorted list of NFT Wallet Scores and their metrics.",
+        "tags": [
+          "NFT Wallets"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__score__{{time_range}}\nWHERE {{wallet}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/wallet"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "portfolio_value",
+                "unrealized_profit",
+                "estimated_portfolio_value",
+                "collection_count",
+                "nft_count",
+                "washtrade_nft_count",
+                "realized_profit"
+              ],
+              "default": "portfolio_value"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/traders": {
+      "get": {
+        "summary": "Wallet Traders",
+        "description": "Retrieve a paginated and sorted list of NFT wallet traders and their metrics.",
+        "tags": [
+          "NFT Wallets"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__traders__{{time_range}}\nWHERE {{wallet}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/wallet"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "traders",
+                "traders_change",
+                "traders_ratio",
+                "traders_ratio_change",
+                "traders_buyers",
+                "traders_buyers_change",
+                "traders_sellers",
+                "traders_sellers_change"
+              ],
+              "default": "traders"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/washtrade": {
+      "get": {
+        "summary": "Wallet Washtrade",
+        "description": "Retrieve a paginated and sorted list of NFT wallet washtrade metrics.",
+        "tags": [
+          "NFT Wallets"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__washtrade__{{time_range}}\nWHERE {{wallet}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/wallet"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "washtrade_volume",
+                "washtrade_suspect_sales",
+                "washtrade_suspect_sales_change",
+                "washtrade_volume_change"
+              ],
+              "default": "washtrade_volume"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/traders": {
+      "get": {
+        "summary": "NFT Traders",
+        "description": "Retrieve a paginated and sorted list of NFT Traders and their metrics.",
+        "tags": [
+          "NFT"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__traders__{{time_range}}\nWHERE contract_address = @contract_address \nand token_id = @token_id\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/token_id"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "traders",
+                "traders_change",
+                "traders_buyers",
+                "traders_sellers",
+                "traders_buyers_change",
+                "traders_sellers_change",
+                "traders_ratio",
+                "traders_ratio_change"
+              ],
+              "default": "traders"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/analytics": {
+      "get": {
+        "summary": "NFT Analytics",
+        "description": "Retrieve a paginated and sorted list of NFT Analytics and their metrics.",
+        "tags": [
+          "NFT"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__analytics__{{time_range}}\nWHERE contract_address = @contract_address \nand token_id = @token_id\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/token_id"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sales",
+                "sales_change",
+                "assets",
+                "assets_change",
+                "transactions",
+                "transactions_change",
+                "transfers",
+                "transfers_change",
+                "volume",
+                "volume_change",
+                "floor_price",
+                "floor_price_eth"
+              ],
+              "default": "sales"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/washtrade": {
+      "get": {
+        "summary": "NFT Washtrade",
+        "description": "Retrieve a paginated and sorted list of NFT Washtrade and their metrics.",
+        "tags": [
+          "NFT"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__washtrade__{{time_range}}\nWHERE contract_address = @contract_address \nand token_id = @token_id\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/token_id"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "washtrade_volume",
+                "washtrade_suspect_sales",
+                "washtrade_assets",
+                "washtrade_wallets",
+                "washtrade_volume_change",
+                "washtrade_suspect_sales_change",
+                "washtrade_assets_change",
+                "washtrade_wallets_change",
+                "washtrade_suspect_transactions",
+                "washtrade_suspect_transactions_change"
+              ],
+              "default": "washtrade_volume"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/holders": {
+      "get": {
+        "summary": "NFT Holders",
+        "description": "Retrieve a paginated and sorted list of NFT Holders and their metrics.",
+        "tags": [
+          "NFT"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__holders__{{time_range}}\nWHERE contract_address = @contract_address \nand token_id = @token_id\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/token_id"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "past_owners_count",
+                "hold_duration",
+                "holders",
+                "holders_change",
+                "wallet_holder_new"
+              ],
+              "default": "past_owners_count"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/scores": {
+      "get": {
+        "summary": "NFT Scores",
+        "description": "Retrieve a paginated and sorted list of NFT Scores and their metrics.",
+        "tags": [
+          "NFT"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__scores__{{time_range}}\nWHERE contract_address = @contract_address \nand token_id = @token_id\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/token_id"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "price_ceiling",
+                "all_time_low",
+                "start_price",
+                "price",
+                "max_price",
+                "washtrade_status",
+                "rarity_rank",
+                "rarity_score",
+                "estimated_price"
+              ],
+              "default": "price_ceiling"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/gaming/metrics": {
+      "get": {
+        "summary": "NFT wallet gaming metrics",
+        "description": "Retrieve a paginated and sorted list of NFT wallet gaming and their metrics.",
+        "tags": [
+          "NFT Gaming"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__game__metrics__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "total_users",
+                "total_users_change",
+                "total_interactions_volume",
+                "total_interactions_volume_change",
+                "nft_count",
+                "total_marketcap",
+                "total_marketcap_change",
+                "unique_wallets",
+                "unique_wallets_change",
+                "avg_earnings",
+                "game_revenue",
+                "game_activity",
+                "avg_game_action",
+                "active_users",
+                "active_users_change",
+                "retention_rate",
+                "retention_rate_change",
+                "game_interactions",
+                "game_interactions_change",
+                "total_interaction",
+                "total_interaction_change",
+                "interaction_rate",
+                "interaction_rate_change",
+                "bot_count",
+                "bot_native_price",
+                "bot_volume",
+                "churn_rate",
+                "retained_players",
+                "retained_players_percentage",
+                "overall_transactions",
+                "transactions_excluding_bots",
+                "transactions_including_bots",
+                "trending_players",
+                "engagement_rate"
+              ],
+              "default": "total_users"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/gaming/collection/metrics": {
+      "get": {
+        "summary": "NFT wallet gaming collection metrics",
+        "description": "Retrieve a paginated and sorted list of NFT wallet gaming collection and their metrics.",
+        "tags": [
+          "NFT Gaming"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__gaming__collection__metrics__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "total_users",
+                "total_users_change",
+                "total_interactions_volume",
+                "total_interactions_volume_change",
+                "total_marketcap",
+                "total_marketcap_change",
+                "active_users",
+                "active_users_change",
+                "retention_rate",
+                "retention_rate_change",
+                "game_interactions",
+                "game_interactions_change",
+                "total_interaction",
+                "total_interaction_change",
+                "interaction_rate",
+                "interaction_rate_change",
+                "bot_count",
+                "bot_native_price",
+                "bot_volume",
+                "unique_wallets",
+                "unique_wallets_change",
+                "avg_earnings",
+                "game_revenue",
+                "game_activity",
+                "avg_game_action",
+                "nft_count"
+              ],
+              "default": "total_users"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/wallet/gaming/collection/trend": {
+      "get": {
+        "summary": "NFT wallet gaming collection trend",
+        "description": "Retrieve a paginated and sorted list of NFT wallet gaming collection and their trend.",
+        "tags": [
+          "NFT Gaming"
+        ],
+        "x-sql-query": "SELECT *\nFROM \"{{blockchain}}\".nft__wallet__gaming__collection__trend__{{time_range}}\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blockchain"
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/time_range"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active_users",
+                "active_users_change",
+                "game_interactions",
+                "game_interactions_change",
+                "avg_earnings",
+                "game_revenue",
+                "game_activity",
+                "avg_game_action",
+                "maxdate"
+              ],
+              "default": "active_users"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "NFT wallet gaming collection trend",
+        "description": "Retrieve a paginated and sorted list of NFT wallet gaming collection and their trend.",
+        "tags": [
+          "NFT Gaming"
+        ],
+        "x-sql-query": "SELECT  \nconcat('0x',lower(hex(transaction_hash))) as hash,\nconcat('0x',lower(hex(seller))) as sending_address,\nconcat('0x',lower(hex(buyer))) as receiving_address,\nevent as transaction_type,\nblock_date as timestamp,\nblockchain, \nchain_id, \ntoken_id, \nis_washtrade,\nmarketplace_name as marketplace,\ncollection,\ncontract_type,\ncontract_created_date,\nsale_price_usd,\nsale_price_eth\nFROM scour.{{blockchain}}_full\nWHERE {{contract_address}}\nORDER BY {{sort_by}} {{sort_order}}\nLIMIT @limit OFFSET @offset;\n",
+        "parameters": [
+          {
+            "name": "blockchain",
+            "in": "query",
+            "description": "Filter or get aggregate blockchain data",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ethereum",
+                "binance",
+                "bitcoin",
+                "polygon",
+                "solana",
+                "avalanche",
+                "linea"
+              ],
+              "default": [
+                "ethereum"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/contract_address"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Property to sort result set by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "timestamp"
+              ],
+              "default": "timestamp"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/sort_order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/liquify/price_estimate": {
+      "get": {
+        "summary": "NFT Token Price Estimate",
+        "description": "Retrieve of NFT token price estimate.",
+        "tags": [
+          "NFT Liquify"
+        ],
+        "x-sql-query": "SELECT \n contract_address as address,\n token_id,\n collection_name,\n chain_id,\n thumbnail_url as token_image_url,\n collection_thumbnail_url as thumbnail_url,\n thumbnail_palette,\n prediction as price_estimate,\n prediction_ub as price_estimate_upper_bound,\n prediction_lb as price_estimate_lower_bound,\n prediction_percentile,\n collection_drivers,\n nft_sales_drivers,\n nft_rarity_drivers\n from unleashnfts_api.liquify_latest_predictions \n where contract_address = '@contract_address'\n and token_id = '@token_id' \n and blockchain_type = '@blockchain' ;\n \n",
+        "parameters": [
+          {
+            "name": "blockchain",
+            "in": "query",
+            "description": "Filter or get aggregate blockchain data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ethereum",
+                "binance",
+                "bitcoin",
+                "polygon",
+                "solana",
+                "avalanche",
+                "linea"
+              ]
+            }
+          },
+          {
+            "name": "contract_address",
+            "in": "query",
+            "description": "Address of the contract",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "token id of the contract address",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/liquify/collection/price_estimate": {
+      "get": {
+        "summary": "NFT Liquify collection Price Estimate",
+        "description": "Retrieve of NFT token price estimate.",
+        "tags": [
+          "NFT Liquify"
+        ],
+        "x-sql-query": "SELECT \n contract_address as address,\n token_id,\n collection_name,\n chain_id,\n thumbnail_url as token_image_url,\n collection_thumbnail_url as thumbnail_url,\n thumbnail_palette,\n prediction as price_estimate,\n prediction_ub as price_estimate_upper_bound,\n prediction_lb as price_estimate_lower_bound,\n prediction_percentile,\n collection_drivers,\n nft_sales_drivers,\n nft_rarity_drivers\n from unleashnfts_api.liquify_latest_predictions \n where contract_address = '@contract_address' \n and blockchain_type = '@blockchain' \n LIMIT @limit OFFSET @offset;\n \n",
+        "parameters": [
+          {
+            "name": "blockchain",
+            "in": "query",
+            "description": "Filter or get aggregate blockchain data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ethereum",
+                "binance",
+                "bitcoin",
+                "polygon",
+                "solana",
+                "avalanche",
+                "linea"
+              ]
+            }
+          },
+          {
+            "name": "contract_address",
+            "in": "query",
+            "description": "Address of the contract",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/liquify/collection/supported_collections": {
+      "get": {
+        "summary": "NFT Liquify Supported Collections",
+        "description": "Retrieve of NFT Supported Collections",
+        "tags": [
+          "NFT Liquify"
+        ],
+        "x-sql-query": "SELECT DISTINCT\n contract_address as address,\n collection_name,\n chain_id,\n thumbnail_url as token_image_url,\n collection_thumbnail_url as thumbnail_url,\n thumbnail_palette\n from unleashnfts_api.liquify_latest_predictions \n where blockchain_type = '@blockchain' \n LIMIT @limit OFFSET @offset;\n \n",
+        "parameters": [
+          {
+            "name": "blockchain",
+            "in": "query",
+            "description": "Filter or get aggregate blockchain data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ethereum",
+                "binance",
+                "bitcoin",
+                "polygon",
+                "solana",
+                "avalanche",
+                "linea"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    },
+    "/nft/liquify/price_history": {
+      "get": {
+        "summary": "NFT Token Price Estimate",
+        "description": "Retrieve of NFT token price estimate.",
+        "tags": [
+          "NFT Liquify"
+        ],
+        "x-sql-query": "SELECT *\nFrom unleashnfts_api.nft_price\nwhere contract_address = '@contract_address'\nand token_id = '@token_id' \nand blockchain = '@blockchain' ;\n \n",
+        "parameters": [
+          {
+            "name": "blockchain",
+            "in": "query",
+            "description": "Filter or get aggregate blockchain data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ethereum",
+                "binance",
+                "bitcoin",
+                "polygon",
+                "solana",
+                "avalanche",
+                "linea"
+              ]
+            }
+          },
+          {
+            "name": "contract_address",
+            "in": "query",
+            "description": "Address of the contract",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "token id of the contract address",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/r_200"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "sort_by": {
+        "in": "query",
+        "name": "sort_by",
+        "description": "Property to sort result set by",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "name"
+          ],
+          "default": "name"
+        }
+      },
+      "offset": {
+        "in": "query",
+        "name": "offset",
+        "description": "Index of the page to return",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        }
+      },
+      "sort_order": {
+        "in": "query",
+        "name": "sort_order",
+        "description": "Order to sort the result set in",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "default": "desc"
+        }
+      },
+      "limit": {
+        "in": "query",
+        "name": "limit",
+        "description": "Number of items to return in the result set",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 30
+        }
+      },
+      "blockchain": {
+        "in": "query",
+        "name": "blockchain",
+        "description": "Filter or get aggregate blockchain data",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "full",
+            "ethereum",
+            "binance",
+            "polygon",
+            "solana",
+            "avalanche"
+          ],
+          "default": [
+            "ethereum"
+          ]
+        }
+      },
+      "contract_address": {
+        "in": "query",
+        "name": "contract_address",
+        "required": false,
+        "description": "Metric group values to return",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Metric group for market"
+          }
+        },
+        "style": "form",
+        "explode": false
+      },
+      "wallet_address": {
+        "in": "query",
+        "name": "wallet_address",
+        "description": "Address of the wallet",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "marketplace_name": {
+        "in": "query",
+        "name": "name",
+        "required": false,
+        "description": "Metric group values to return",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Metric group for market"
+          }
+        },
+        "style": "form",
+        "explode": false
+      },
+      "time_range": {
+        "in": "query",
+        "name": "time_range",
+        "description": "Time range to filter results",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "24h",
+            "7d",
+            "30d",
+            "90d",
+            "all"
+          ],
+          "default": "24h"
+        }
+      },
+      "token_id": {
+        "in": "query",
+        "name": "token_id",
+        "description": "Token ID of the NFT",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "wallet": {
+        "in": "query",
+        "name": "wallet",
+        "required": false,
+        "description": "Metric group values to return",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Metric group for market"
+          }
+        },
+        "style": "form",
+        "explode": false
+      }
+    },
+    "responses": {
+      "r_200": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
